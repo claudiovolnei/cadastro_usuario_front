@@ -1,7 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { FieldConfig } from "./field.interface";
-import { DynamicFormComponent } from "./components/dynamic-form/dynamic-form.component";
+import { DynamicFormComponent } from "./components/user/user-form/user-form.component";
 
 @Component({
   selector: "app-root",

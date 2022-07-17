@@ -12,20 +12,20 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
-import { FieldConfig, Validator } from "../../field.interface";
+import { FieldConfig, Validator } from "../../../field.interface";
 
 @Component({
-  exportAs: "dynamicForm",
-  selector: "dynamic-form",
+  exportAs: "userForm",
+  selector: "user-form",
   template: `
-  <form class="dynamic-form" [formGroup]="form" (submit)="onSubmit($event)">
+  <form class="user-form" [formGroup]="form" (submit)="onSubmit($event)">
   <ng-container *ngFor="let field of fields;" dynamicField [field]="field" [group]="form">
   </ng-container>
   </form>
   `,
   styles: []
 })
-export class DynamicFormComponent implements OnInit {
+export class UserFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
 
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();

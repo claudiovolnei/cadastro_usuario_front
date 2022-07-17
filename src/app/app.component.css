@@ -1,0 +1,5 @@
+.formulario {
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}

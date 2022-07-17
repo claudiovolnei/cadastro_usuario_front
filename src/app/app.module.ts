@@ -13,7 +13,7 @@ import { DateComponent } from './components/date/date.component';
 import { RadiobuttonComponent } from './components/radiobutton/radiobutton.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
-import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { UserFormComponent } from './components/user/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.com
     RadiobuttonComponent,
     CheckboxComponent,
     DynamicFieldDirective,
-    DynamicFormComponent
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

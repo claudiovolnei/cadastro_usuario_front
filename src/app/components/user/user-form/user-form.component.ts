@@ -12,6 +12,8 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
+import { User } from "src/app/models/User";
+import { UserService } from "src/app/services/User/user.service";
 import { FieldConfig, Validator } from "../../../field.interface";
 
 @Component({
@@ -31,11 +33,14 @@ export class UserFormComponent implements OnInit {
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;
+  public user: User;
 
   get value() {
     return this.form.value;
   }
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private _userService: UserService) {}
 
   ngOnInit() {
     this.form = this.createControl();
@@ -44,11 +49,25 @@ export class UserFormComponent implements OnInit {
   onSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    if (this.form.valid) {
-      this.submit.emit(this.form.value);
-    } else {
-      this.validateAllFormFields(this.form);
-    }
+    this.convertFormstToUser();
+    console.log(this.user)
+    // this._userService.postSaveUser(this.form.value)
+    //   .subscribe((res: any) => {
+    //     alert('Sucesso ao salvar usuario!')
+        
+    //   }, () => {
+    //     alert('Erro ao salvar usuário.')
+    // });   
+
+    // if (this.form.valid) {
+    //   this.submit.emit(this.form.value);
+    // } else {
+    //   this.validateAllFormFields(this.form);
+    // }
+  }
+
+  convertFormstToUser() {
+    
   }
 
   createControl() {

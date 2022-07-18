@@ -14,6 +14,8 @@ import { RadiobuttonComponent } from './components/radiobutton/radiobutton.compo
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
 import { UserFormComponent } from './components/user/user-form/user-form.component';
+import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { UserFormComponent } from './components/user/user-form/user-form.compone
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [

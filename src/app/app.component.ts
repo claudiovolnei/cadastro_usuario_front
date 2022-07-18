@@ -1,7 +1,9 @@
 import { Component, ViewChild } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { FieldConfig } from "./field.interface";
-import { DynamicFormComponent } from "./components/user/user-form/user-form.component";
+import { UserFormComponent } from "./components/user/user-form/user-form.component";
+import { ScholarityService } from "./services/scholarity/scholarity.service";
+import { Scholarity } from "./models/Scholarity";
 
 @Component({
   selector: "app-root",
@@ -9,13 +11,40 @@ import { DynamicFormComponent } from "./components/user/user-form/user-form.comp
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  @ViewChild(DynamicFormComponent, {static: true}) form: DynamicFormComponent;
+  @ViewChild(UserFormComponent, {static: true}) form: UserFormComponent;
+  constructor(
+    private _scholarityService: ScholarityService
+  )
+  {}
+
+  ngOnInit(): void {
+    this.getScholarities();
+  }
+
   regConfig: FieldConfig[] = [
     {
       type: "input",
-      label: "Username",
+      label: "Nome",
       inputType: "text",
-      name: "name",
+      name: "nome",
+      validations: [
+        {
+          name: "required",
+          validator: Validators.required,
+          message: "Name Required"
+        },
+        {
+          name: "pattern",
+          validator: Validators.pattern("^[a-zA-Z]+$"),
+          message: "Accept only text"
+        }
+      ]
+    },
+    {
+      type: "input",
+      label: "Sobrenome",
+      inputType: "text",
+      name: "sobrenome",
       validations: [
         {
           name: "required",
@@ -49,56 +78,79 @@ export class AppComponent {
         }
       ]
     },
-    {
-      type: "input",
-      label: "Password",
-      inputType: "password",
-      name: "password",
-      validations: [
-        {
-          name: "required",
-          validator: Validators.required,
-          message: "Password Required"
-        }
-      ]
-    },
-    {
-      type: "radiobutton",
-      label: "Gender",
-      name: "gender",
-      options: ["Male", "Female"],
-      value: "Male"
-    },
+    // {
+    //   type: "input",
+    //   label: "Password",
+    //   inputType: "password",
+    //   name: "password",
+    //   validations: [
+    //     {
+    //       name: "required",
+    //       validator: Validators.required,
+    //       message: "Password Required"
+    //     }
+    //   ]
+    // },
+    // {
+    //   type: "radiobutton",
+    //   label: "Gender",
+    //   name: "gender",
+    //   options: ["Male", "Female"],
+    //   value: "Male"
+    // },
     {
       type: "date",
-      label: "DOB",
-      name: "dob",
+      label: "Data Nascimento",
+      name: "dat_nasc",
       validations: [
         {
           name: "required",
           validator: Validators.required,
-          message: "Date of Birth Required"
+          message: "Data de nascimento obrigatório"
         }
       ]
     },
     {
       type: "select",
-      label: "Country",
-      name: "country",
+      label: "Escolaridade",
+      name: "escolaridade",
       value: "UK",
-      options: ["India", "UAE", "UK", "US"]
+      options: this.getScholarities(),
+      validations: [
+        {
+          name: "required",
+          validator: Validators.required,
+          message: "Escolaridade obrigatório!"
+        }
+      ]
     },
-    {
-      type: "checkbox",
-      label: "Accept Terms",
-      name: "term",
-      value: true
-    },
+    // {
+    //   type: "checkbox",
+    //   label: "Accept Terms",
+    //   name: "term",
+    //   value: true
+    // },
     {
       type: "button",
-      label: "Save"
+      label: "Salvar"
     }
   ];
+
+  public getScholarities(): any[] {
+    let scholarity = [];
+    this._scholarityService.getScholarities()
+      .subscribe((res: Scholarity[]) => {
+        
+        res.forEach(element => {
+          scholarity.push(element.descricao)
+        });
+        
+      }, () => {
+        alert('Erro ao obter escolaridades')
+    });    
+
+    return scholarity;
+  }
 
   submit(value: any) {}
 }

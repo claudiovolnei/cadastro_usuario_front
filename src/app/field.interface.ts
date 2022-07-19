@@ -12,5 +12,6 @@ export interface FieldConfig {
     collections?: any;
     type: string;
     value?: any;
+    fileValue?: any,
     validations?: Validator[];
 }

@@ -31,7 +31,7 @@ export class UserFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
 
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
-
+  file: File;
   form: FormGroup;
   public user: User;
 
@@ -49,25 +49,34 @@ export class UserFormComponent implements OnInit {
   onSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.convertFormstToUser();
-    console.log(this.user)
-    // this._userService.postSaveUser(this.form.value)
+    this.convertToFieldsInUser();
+    console.log(this.form,this.user)
+    if(this.file === null || this.file === undefined)
+      return alert('Arquivo invalido.')
+    else {
+      let fData: FormData = new FormData;
+      fData.append("file[]", this.file);
+    //   this.form.addControl(fData)
+    //   this._userService.postSaveUser(fData)
     //   .subscribe((res: any) => {
     //     alert('Sucesso ao salvar usuario!')
         
     //   }, () => {
     //     alert('Erro ao salvar usuário.')
-    // });   
-
-    // if (this.form.valid) {
-    //   this.submit.emit(this.form.value);
-    // } else {
-    //   this.validateAllFormFields(this.form);
-    // }
+    // }); 
+    }
+      
   }
 
-  convertFormstToUser() {
-    
+  getFile() {
+    this.fields.forEach(field => {
+      if(field.type == 'fileinput')
+        this.file = field.fileValue;
+    });
+  }
+
+  convertToFieldsInUser() {
+    this.user = JSON.parse(JSON.stringify(this.form.value));    
   }
 
   createControl() {

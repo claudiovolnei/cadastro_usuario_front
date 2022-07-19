@@ -10,6 +10,7 @@ import {
   import { DateComponent } from "../date/date.component";
   import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
   import { CheckboxComponent } from "../checkbox/checkbox.component";
+import { FileInputComponent } from "../flieinput/fileinput.component";
 
   const componentMapper = {
     input: InputComponent,
@@ -17,7 +18,8 @@ import {
     select: SelectComponent,
     date: DateComponent,
     radiobutton: RadiobuttonComponent,
-    checkbox: CheckboxComponent
+    checkbox: CheckboxComponent,
+    fileinput: FileInputComponent
     };
 
 @Directive({

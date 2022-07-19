@@ -13,8 +13,11 @@ import { DateComponent } from './components/date/date.component';
 import { RadiobuttonComponent } from './components/radiobutton/radiobutton.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
-import { UserFormComponent } from './components/user/user-form/user-form.component';
+import { UserFormComponent } from './pages/user/user-form/user-form.component';
 import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
+import { UserListComponent } from './pages/user/user-list/user-list.component';
+import { TableBasic } from './components/table/table.component';
+import { FileInputComponent } from './components/flieinput/fileinput.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { HttpClientModule, /* other http imports */ } from "@angular/common/http
     RadiobuttonComponent,
     CheckboxComponent,
     DynamicFieldDirective,
-    UserFormComponent
+    UserFormComponent,
+    UserListComponent,
+    TableBasic,    
+    FileInputComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,7 @@ import { HttpClientModule, /* other http imports */ } from "@angular/common/http
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule,    
     HttpClientModule
   ],
   providers: [],
@@ -46,7 +52,9 @@ import { HttpClientModule, /* other http imports */ } from "@angular/common/http
     SelectComponent,
     DateComponent,
     RadiobuttonComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    TableBasic,
+    FileInputComponent
     ]
 })
 export class AppModule { }

@@ -13,7 +13,9 @@ MatNativeDateModule,
 MatSelectModule,
 MatOptionModule,
 MatCheckboxModule,
-MatRadioModule
+MatRadioModule,
+MatTableModule,
+MatToolbarModule
 } from "@angular/material";
 @NgModule({
 imports: [
@@ -29,7 +31,9 @@ MatMomentDateModule,
 MatSelectModule,
 MatOptionModule,
 MatCheckboxModule,
-MatRadioModule
+MatRadioModule,
+MatTableModule,
+MatToolbarModule,
 ],
 exports: [
 MatButtonModule,
@@ -44,7 +48,9 @@ MatMomentDateModule,
 MatSelectModule,
 MatOptionModule,
 MatCheckboxModule,
-MatRadioModule
+MatRadioModule,
+MatTableModule,
+MatToolbarModule
 ]
 })
 export class MaterialModule {}

@@ -1,25 +1,31 @@
 import { Component, ViewChild } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { FieldConfig } from "./field.interface";
-import { UserFormComponent } from "./components/user/user-form/user-form.component";
+import { UserFormComponent } from "./pages/user/user-form/user-form.component";
 import { ScholarityService } from "./services/scholarity/scholarity.service";
 import { Scholarity } from "./models/Scholarity";
+import { UserListComponent } from "./pages/user/user-list/user-list.component";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
+
+
+
 export class AppComponent {
   @ViewChild(UserFormComponent, {static: true}) form: UserFormComponent;
   constructor(
     private _scholarityService: ScholarityService
   )
   {}
+  
 
   ngOnInit(): void {
     this.getScholarities();
   }
+  
 
   regConfig: FieldConfig[] = [
     {
@@ -101,7 +107,7 @@ export class AppComponent {
     {
       type: "date",
       label: "Data Nascimento",
-      name: "dat_nasc",
+      name: "dataNascimento",
       validations: [
         {
           name: "required",
@@ -113,9 +119,9 @@ export class AppComponent {
     {
       type: "select",
       label: "Escolaridade",
-      name: "escolaridade",
-      value: "UK",
-      options: this.getScholarities(),
+      name: "escolaridadeId",
+      value: null,
+      collections: this.getScholarities(),
       validations: [
         {
           name: "required",
@@ -131,6 +137,19 @@ export class AppComponent {
     //   value: true
     // },
     {
+      type: "fileinput",
+      label: "Histórico Escolar",
+      name: "historicoEscolar",
+      inputType: "file",
+      validations: [
+        {
+          name: "required",
+          validator: Validators.required,
+          message: "Histórico escolar obrigatório"
+        }
+      ]
+    },
+    {
       type: "button",
       label: "Salvar"
     }
@@ -139,18 +158,19 @@ export class AppComponent {
   public getScholarities(): any[] {
     let scholarity = [];
     this._scholarityService.getScholarities()
-      .subscribe((res: Scholarity[]) => {
-        
+      .subscribe((res: Scholarity[]) => {        
         res.forEach(element => {
-          scholarity.push(element.descricao)
+          scholarity.push(element)
         });
         
       }, () => {
         alert('Erro ao obter escolaridades')
     });    
-
+    console.log(scholarity)
     return scholarity;
   }
 
   submit(value: any) {}
 }
+
+

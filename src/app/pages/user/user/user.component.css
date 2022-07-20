@@ -1,3 +1,9 @@
+.formulario {
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+
 .example-container {
     display: flex;
     flex-direction: column;

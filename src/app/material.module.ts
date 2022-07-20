@@ -15,7 +15,7 @@ MatOptionModule,
 MatCheckboxModule,
 MatRadioModule,
 MatTableModule,
-MatToolbarModule
+MatToolbarModule,
 } from "@angular/material";
 @NgModule({
 imports: [

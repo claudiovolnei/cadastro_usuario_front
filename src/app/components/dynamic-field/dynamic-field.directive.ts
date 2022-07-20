@@ -36,7 +36,7 @@ constructor(
         private container: ViewContainerRef
 ) { }
 
-ngOnInit() {
+ngOnInit() {  
   const factory = this.resolver.resolveComponentFactory(
     componentMapper[this.field.type]
     );

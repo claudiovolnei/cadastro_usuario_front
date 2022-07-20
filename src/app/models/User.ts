@@ -6,6 +6,7 @@ export class User {
       public email: string,
       public dataNascimento: Date,
       public esolaridadeId: number,
+      public file: any,
       SchoolRecords
     ) { }
 }

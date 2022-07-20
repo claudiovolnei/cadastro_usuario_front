@@ -15,9 +15,10 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
 import { UserFormComponent } from './pages/user/user-form/user-form.component';
 import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
-import { UserListComponent } from './pages/user/user-list/user-list.component';
 import { TableBasic } from './components/table/table.component';
 import { FileInputComponent } from './components/flieinput/fileinput.component';
+import { UserComponent } from './pages/user/user/user.component';
+import { FormComponent } from './components/form/form.component';
 
 
 @NgModule({
@@ -31,9 +32,10 @@ import { FileInputComponent } from './components/flieinput/fileinput.component';
     CheckboxComponent,
     DynamicFieldDirective,
     UserFormComponent,
-    UserListComponent,
     TableBasic,    
-    FileInputComponent
+    FormComponent,
+    FileInputComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { FileInputComponent } from './components/flieinput/fileinput.component';
     RadiobuttonComponent,
     CheckboxComponent,
     TableBasic,
-    FileInputComponent
+    FileInputComponent,
+    FormComponent
     ]
 })
 export class AppModule { }

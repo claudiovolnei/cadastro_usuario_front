@@ -1,0 +1,14 @@
+<div class="form formulario">
+  <div style="text-align:center">
+    <h1>
+      Cadastro de Usuário
+    </h1>
+  </div>
+  <form-basic [fields]="regConfig" (submit)="submit($event)"></form-basic>
+   
+</div>
+<div *ngIf="users && colunmsUser">
+  <br>
+  <table-basic [dataSource]="users" [displayedColumns]="colunmsUser"></table-basic>
+</div>
+

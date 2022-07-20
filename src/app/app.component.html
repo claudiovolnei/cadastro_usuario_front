@@ -1,17 +1,3 @@
-<div class="form formulario">
-  <div style="text-align:center">
-    <h1>
-      Cadastro de Usuário
-    </h1>
-  </div>
-  <user-form [fields]="regConfig" (submit)="submit($event)">
-  </user-form >
-  <div class="margin-top">
-    {{ form.value | json}}
-  </div>    
-</div>
-<div>
-  <br>
-  <user-list></user-list>
-</div>
+<app-user></app-user>
+
 

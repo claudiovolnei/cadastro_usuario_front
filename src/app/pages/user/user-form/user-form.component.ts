@@ -50,20 +50,26 @@ export class UserFormComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.convertToFieldsInUser();
-    console.log(this.form,this.user)
+    this.getFile();
     if(this.file === null || this.file === undefined)
       return alert('Arquivo invalido.')
     else {
-      let fData: FormData = new FormData;
-      fData.append("file[]", this.file);
-    //   this.form.addControl(fData)
-    //   this._userService.postSaveUser(fData)
-    //   .subscribe((res: any) => {
-    //     alert('Sucesso ao salvar usuario!')
+      let usuarioDto: FormData = new FormData;
+      usuarioDto.append("file", this.file);
+      
+      usuarioDto.append('nome',this.user.nome);
+      usuarioDto.append('sobrenome',this.user.sobrenome);
+      usuarioDto.append('email',this.user.email);
+      usuarioDto.append('dataNascimento',this.user.dataNascimento.toString());
+      usuarioDto.append('esolaridadeId','' + this.user.esolaridadeId);
+       console.log(this.user, usuarioDto, this.file)
+      this._userService.postSaveUser(usuarioDto)
+      .subscribe((res: any) => {
+        alert('Sucesso ao salvar usuario!')
         
-    //   }, () => {
-    //     alert('Erro ao salvar usuário.')
-    // }); 
+      }, (err) => {
+        alert(err.error);        
+    }); 
     }
       
   }
@@ -71,7 +77,7 @@ export class UserFormComponent implements OnInit {
   getFile() {
     this.fields.forEach(field => {
       if(field.type == 'fileinput')
-        this.file = field.fileValue;
+        this.file = field.fileValue[0];
     });
   }
 

@@ -19,6 +19,7 @@ import {
     exportAs: "Form",
     selector: "app-form-basic",
     template: `
+    <app-loader></app-loader>
     <form class="form" [formGroup]="form" (submit)="onSubmit($event)">
     <ng-container *ngFor="let field of fields;" dynamicField [field]="field" [group]="form">
     </ng-container>

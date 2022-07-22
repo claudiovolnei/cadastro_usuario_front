@@ -11,7 +11,7 @@ export class ScholarityService {
 constructor(public http: HttpClient,) { }
 
 public getScholarities(){
-  return this.http.get<Scholarity[]>(`${environment.apiUrl}/Escolaridade`);
+  return this.http.get<Scholarity[]>(`${environment.apiUrl}/Scholarity`);
 }
 
 }

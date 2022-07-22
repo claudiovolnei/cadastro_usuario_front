@@ -13,12 +13,13 @@ import { DateComponent } from './components/date/date.component';
 import { RadiobuttonComponent } from './components/radiobutton/radiobutton.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
-import { UserFormComponent } from './pages/user/user-form/user-form.component';
-import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS, /* other http imports */ } from "@angular/common/http";
 import { TableBasic } from './components/table/table.component';
 import { FileInputComponent } from './components/flieinput/fileinput.component';
 import { UserComponent } from './pages/user/user/user.component';
 import { FormComponent } from './components/form/form.component';
+import { LoaderInterceptor } from './class/interceptors/loader.interceptor/loader.interceptor.component';
+import { LoaderComponent } from './components/loader/loader/loader.component';
 
 
 @NgModule({
@@ -31,11 +32,11 @@ import { FormComponent } from './components/form/form.component';
     RadiobuttonComponent,
     CheckboxComponent,
     DynamicFieldDirective,
-    UserFormComponent,
     TableBasic,    
     FormComponent,
     FileInputComponent,
     UserComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,13 @@ import { FormComponent } from './components/form/form.component';
     FormsModule,    
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true 
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     InputComponent,
@@ -57,7 +64,8 @@ import { FormComponent } from './components/form/form.component';
     CheckboxComponent,
     TableBasic,
     FileInputComponent,
-    FormComponent
+    FormComponent,
+    LoaderComponent
     ]
 })
 export class AppModule { }

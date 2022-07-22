@@ -13,22 +13,22 @@ export class UserService {
   ) { }
 
   public getUsers() : Observable<User[]>{
-    return this.http.get<User[]>(`${environment.apiUrl}/Usuario`);
+    return this.http.get<User[]>(`${environment.apiUrl}/User`);
   }
   public getUser(id: any){
-    return this.http.get<User>(`${environment.apiUrl}/Usuario/${id}`);
+    return this.http.get<User>(`${environment.apiUrl}/User/${id}`);
   }
 
   public postSaveUser(obj: FormData) {
-    return this.http.post<any>(`${environment.apiUrl}/Usuario`, obj);
+    return this.http.post<any>(`${environment.apiUrl}/User`, obj);
   }
 
   public putSaveUser(obj: User) {
-    return this.http.put<any>(`${environment.apiUrl}/Usuario`, obj);
+    return this.http.put<any>(`${environment.apiUrl}/User`, obj);
   }
   
   public deleteUser(id: any) {
-    return this.http.delete<any>(`${environment.apiUrl}/Usuario/${id}`);
+    return this.http.delete<any>(`${environment.apiUrl}/User/${id}`);
   }
 
 }

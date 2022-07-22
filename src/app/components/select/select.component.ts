@@ -6,7 +6,7 @@ selector: "app-select",
 template: `
 <mat-form-field class="demo-full-width margin-top" [formGroup]="group">
 <mat-select [placeholder]="field.label" [formControlName]="field.name">
-<mat-option *ngFor="let item of field.collections" [value]="item.id">{{item.descricao}}</mat-option>
+<mat-option *ngFor="let item of field.collections" [value]="item.id">{{item.description}}</mat-option>
 </mat-select>
 </mat-form-field>
 `,

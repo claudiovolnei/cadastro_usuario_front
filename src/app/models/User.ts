@@ -1,20 +1,20 @@
 export class User {
     constructor(
       public id: number,
-      public nome: string,
-      public sobrenome: string,
+      public name: string,
+      public lastname: string,
       public email: string,
-      public dataNascimento: Date,
-      public esolaridadeId: number,
+      public birthDate: Date,
+      public scholarityId: number,
       public file: any,
-      SchoolRecords
+      public schoolRecords: SchoolRecords
     ) { }
 }
 export class SchoolRecords  {
     constructor(
         public id: number,
-        public nome: string,
-        public formato: string,
-        public caminho: string
+        public name: string,
+        public format: string,
+        public path: string
     ) {}
 }

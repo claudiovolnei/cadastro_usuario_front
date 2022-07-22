@@ -17,12 +17,12 @@ import {
   
   @Component({
     exportAs: "Form",
-    selector: "form-basic",
+    selector: "app-form-basic",
     template: `
-    <!-- <form class="form" [formGroup]="form" (submit)="onSubmit($event)"> -->
+    <form class="form" [formGroup]="form" (submit)="onSubmit($event)">
     <ng-container *ngFor="let field of fields;" dynamicField [field]="field" [group]="form">
     </ng-container>
-    <!-- </form> -->
+    </form>
     `,
     styles: []
   })
@@ -44,8 +44,7 @@ import {
     }
   
     onSubmit(event: Event) {    
-        event.preventDefault();
-        event.stopPropagation();
+        this.submit.emit(event)
     }
 
     createControl() {

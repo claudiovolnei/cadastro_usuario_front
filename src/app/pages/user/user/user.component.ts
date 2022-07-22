@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
 
   file: File;
   public user: User;
+  public userDto: FormData = new FormData();
 
   constructor(
     private _userService: UserService
@@ -33,8 +34,8 @@ export class UserComponent implements OnInit {
   this._userService.getUsers().subscribe(
     (res: User[]) => {
       this.users = res;
-   }, error => {
-     alert(' Erro ao carregar usuarios: ${error}');
+   }, (err) => {
+     alert(`Erro ao carregar usuarios`);
      
    });
   }  
@@ -44,17 +45,12 @@ export class UserComponent implements OnInit {
       type: "input",
       label: "Nome",
       inputType: "text",
-      name: "nome",
+      name: "name",
       validations: [
         {
           name: "required",
           validator: Validators.required,
           message: "Name Required"
-        },
-        {
-          name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z]+$"),
-          message: "Accept only text"
         }
       ]
     },
@@ -62,17 +58,12 @@ export class UserComponent implements OnInit {
       type: "input",
       label: "Sobrenome",
       inputType: "text",
-      name: "sobrenome",
+      name: "lastname",
       validations: [
         {
           name: "required",
           validator: Validators.required,
           message: "Name Required"
-        },
-        {
-          name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z]+$"),
-          message: "Accept only text"
         }
       ]
     },
@@ -99,7 +90,7 @@ export class UserComponent implements OnInit {
     {
       type: "date",
       label: "Data Nascimento",
-      name: "dataNascimento",
+      name: "birthDate",
       validations: [
         {
           name: "required",
@@ -111,7 +102,7 @@ export class UserComponent implements OnInit {
     {
       type: "select",
       label: "Escolaridade",
-      name: "escolaridadeId",
+      name: "scholarityId",
       value: null,
       collections: this.getScholarities(),
       validations: [
@@ -163,27 +154,27 @@ export class UserComponent implements OnInit {
   }
 
   convertToFieldsInUser() {
-    this.user = JSON.parse(JSON.stringify(this.form.value));    
+    this.user = JSON.parse(JSON.stringify(this.form.value));  
+    this.getFile();
+    this.userDto.append("file", this.file); 
+    // this.userDto.append("user", JSON.stringify(this.user)); 
+    this.userDto.append('nome',this.user.name);
+    this.userDto.append('sobrenome',this.user.lastname);
+    this.userDto.append('email',this.user.email);
+    this.userDto.append('dataNascimento',this.user.birthDate.toString());
+    this.userDto.append('escolaridadeId','' + this.user.scholarityId);
+     console.log(this.user, JSON.stringify(this.user), this.userDto, this.file)  
   }
 
   submit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.convertToFieldsInUser();
-    this.getFile();
+    
     if(this.file === null || this.file === undefined)
-      return alert('Arquivo invalido.')
-    else {
-      let usuarioDto: FormData = new FormData;
-      usuarioDto.append("file", this.file);
-      
-      usuarioDto.append('nome',this.user.nome);
-      usuarioDto.append('sobrenome',this.user.sobrenome);
-      usuarioDto.append('email',this.user.email);
-      usuarioDto.append('dataNascimento',this.user.dataNascimento.toString());
-      usuarioDto.append('esolaridadeId','' + this.user.esolaridadeId);
-       console.log(this.user, usuarioDto, this.file)
-      this._userService.postSaveUser(usuarioDto)
+       alert('Arquivo invalido.')
+    else {      
+      this._userService.postSaveUser(this.userDto)
       .subscribe((res: any) => {
         alert('Sucesso ao salvar usuario!')
         

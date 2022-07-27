@@ -10,6 +10,6 @@
 <app-loader></app-loader>
 <div *ngIf="users && colunmsUser">
   <br>
-  <table-basic [dataSource]="users" [displayedColumns]="colunmsUser"></table-basic>
+  <table-basic [dataSource]="users" [displayedColumns]="colunmsUser" [descriptionsColumns]="descriptionsColumns" (edit)="edit($event)" (delete)="delete($event)" (download)="download($event)"></table-basic>
 </div>
 

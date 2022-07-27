@@ -46,6 +46,7 @@ import {
   
     onSubmit(event: Event) {    
         this.submit.emit(event)
+        this.form.reset();
     }
 
     createControl() {
@@ -59,6 +60,19 @@ import {
         group.addControl(field.name, control);
       });
       return group;
+    }
+
+    editControl(values: any) {
+      this.form.setValue({
+        name : values.name,
+        lastname: values.lastname,
+        email: values.email,
+        birthDate: values.birthDate,
+        scholarityId: values.scholarity.id,
+        schoolRecords: values.schoolRecords.name
+      });
+
+      
     }
   
     bindValidations(validations: any) {

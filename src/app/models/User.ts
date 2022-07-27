@@ -7,7 +7,7 @@ export class User {
       public birthDate: Date,
       public scholarityId: number,
       public file: any,
-      public schoolRecords: SchoolRecords
+      public schoolRecords?: SchoolRecords
     ) { }
 }
 export class SchoolRecords  {

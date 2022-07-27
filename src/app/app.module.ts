@@ -16,7 +16,7 @@ import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.
 import { HttpClientModule, HTTP_INTERCEPTORS, /* other http imports */ } from "@angular/common/http";
 import { TableBasic } from './components/table/table.component';
 import { FileInputComponent } from './components/flieinput/fileinput.component';
-import { UserComponent } from './pages/user/user/user.component';
+import { UserComponent } from './pages/user/user.component';
 import { FormComponent } from './components/form/form.component';
 import { LoaderInterceptor } from './class/interceptors/loader.interceptor/loader.interceptor.component';
 import { LoaderComponent } from './components/loader/loader/loader.component';
@@ -36,7 +36,8 @@ import { LoaderComponent } from './components/loader/loader/loader.component';
     FormComponent,
     FileInputComponent,
     UserComponent,
-    LoaderComponent
+    LoaderComponent,
+
   ],
   imports: [
     BrowserModule,

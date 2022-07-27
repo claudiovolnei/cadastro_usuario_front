@@ -18,7 +18,7 @@ export class UserService {
   public getUser(id: any){
     return this.http.get<User>(`${environment.apiUrl}/User/${id}`);
   }
-
+  
   public postSaveUser(obj: FormData) {
     return this.http.post<any>(`${environment.apiUrl}/User`, obj);
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { Console } from "console";
 import { FieldConfig } from "../../field.interface";
 @Component({
 selector: "file-input",
@@ -10,8 +11,7 @@ template: `
 <div class="myfilebrowser">
     <mat-toolbar>
       <!-- Readonly Input to show File names -->
-      <input matInput [value]="filename" [formControlName]="field.name" [placeholder]="field.label" />
-
+      <input matInput [value]="filename" [formControlName]="field.name"  />
       <!-- Browse Button -->
       <button mat-flat-button color="primary">
         Procurar
@@ -35,7 +35,7 @@ export class FileInputComponent implements OnInit {
 field: FieldConfig;
 group: FormGroup;
 file: File;
-filename: string = "Selecione um arquivo";
+filename: string = "Selecione um histórico escolar";
 constructor() {}
 ngOnInit() {}
 

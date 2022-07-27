@@ -23,12 +23,12 @@ export class UserService {
     return this.http.post<any>(`${environment.apiUrl}/User`, obj);
   }
 
-  public putSaveUser(obj: User) {
+  public putSaveUser(obj: User) : Observable<Object> {
     return this.http.put<any>(`${environment.apiUrl}/User`, obj);
   }
   
-  public deleteUser(id: any) {
-    return this.http.delete<any>(`${environment.apiUrl}/User/${id}`);
+  public deleteUser(id: any) : Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/User/${id}`, {responseType: 'text'});
   }
 
 }

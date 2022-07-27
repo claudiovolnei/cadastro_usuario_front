@@ -46,7 +46,6 @@ import {
   
     onSubmit(event: Event) {    
         this.submit.emit(event)
-        this.form.reset();
     }
 
     createControl() {
@@ -63,16 +62,21 @@ import {
     }
 
     editControl(values: any) {
+      const fileInput = new File([values.blob], values.schoolRecords.name, { type: values.schoolRecords.format})
       this.form.setValue({
         name : values.name,
         lastname: values.lastname,
         email: values.email,
         birthDate: values.birthDate,
         scholarityId: values.scholarity.id,
-        schoolRecords: values.schoolRecords.name
+        schoolRecords: fileInput
       });
 
       
+    }
+
+    resetControl() {
+      this.form.reset()
     }
   
     bindValidations(validations: any) {

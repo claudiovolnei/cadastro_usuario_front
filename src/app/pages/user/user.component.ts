@@ -24,7 +24,6 @@ export class UserComponent implements OnInit {
 
   file: File;
   public user: User;
-  public userDto: FormData = new FormData();
 
   constructor(
     private _userService: UserService
@@ -158,33 +157,39 @@ export class UserComponent implements OnInit {
     });
   }
 
-  convertToFieldsInUser() {
+  convertToFieldsInUser(): any {
     this.user = JSON.parse(JSON.stringify(this.form.value));  
-    this.getFile();
-    this.userDto.append("file", this.file); 
-    this.userDto.append('name',this.user.name);
-    this.userDto.append('lastname',this.user.lastname);
-    this.userDto.append('email',this.user.email);
-    this.userDto.append('birthDate',this.user.birthDate.toString());
-    this.userDto.append('scholarityId','' + this.user.scholarityId);
-     console.log(this.user, JSON.stringify(this.user), this.userDto, this.file)  
+
+    let userDto = new FormData(); 
+    userDto.append("file", this.file); 
+    userDto.append('name',this.user.name);
+    userDto.append('lastname',this.user.lastname);
+    userDto.append('email',this.user.email);
+    userDto.append('birthDate',this.user.birthDate.toString());
+    userDto.append('scholarityId','' + this.user.scholarityId);
+    console.log(this.user, this.file, userDto)
+    
+    return userDto;
   }
 
   submit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.convertToFieldsInUser();
+    this.getFile();
     
     if(this.file === null || this.file === undefined)
        alert('Arquivo invalido.')
     else {      
-      this._userService.postSaveUser(this.userDto)
+      this._userService.postSaveUser(this.convertToFieldsInUser())
       .subscribe((res: any) => {
-        alert('Sucesso ao salvar usuario!')
-        this.getUsers();        
+        alert('Usuário adicionado!')
       }, (err) => {
         alert(err.error);        
-    }); 
+      },
+      () => {
+        this.getUsers();        
+        this.form.resetControl()
+      }); 
     }
   }
 
@@ -197,20 +202,21 @@ export class UserComponent implements OnInit {
     console.log(this.form)
   }
 
-  delete(event: any){
-    if (confirm(`Deseja remover ${event.name} ?` ) == true) {
-      this._userService.deleteUser(event.id)
-        .subscribe((res: any) => {
-          console.log(res)
-          alert(res)
-          this.getUsers();        
+  delete(props: any) {
+    if (confirm(`Deseja remover ${props.name} ?` ) == true) {
+      this._userService.deleteUser(props.id)
+        .subscribe((res) => {
+          alert(res)                 
         }, (err) => {
           alert(err.error);        
-      }); 
+        },
+        () => {
+          this.getUsers(); 
+        }); 
     }
   }
 
-  download(event: any){
-    window.open(`${environment.apiUrl}/schoolRecords/${event}`, '_blank')      
+  download(id: any){
+    window.open(`${environment.apiUrl}/schoolRecords/${id}`, '_blank')      
   }
 }

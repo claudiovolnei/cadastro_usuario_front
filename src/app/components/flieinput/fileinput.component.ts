@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Console } from "console";
 import { FieldConfig } from "../../field.interface";
 @Component({
 selector: "file-input",
@@ -40,7 +39,6 @@ constructor() {}
 ngOnInit() {}
 
 onFileChange(event) {
-    const reader = new FileReader();
     if (event.target.files && !event.target.files.lengh) {
       this.field.fileValue = event.target.files;
       this.filename = this.field.fileValue[0].name
